@@ -20,6 +20,9 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     implementation "org.springframework.boot:spring-boot-configuration-processor"
+
+    compile group: 'org.webjars', name: 'webjars-locator-core', version: '0.43'
+
 }
 
 test {
