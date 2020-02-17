@@ -1,15 +1,16 @@
 package me.ewan.ewan.externalSetting;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import javax.validation.Valid;
-
 @Component
 public class ExternalSettingRunner implements ApplicationRunner {
+
+    private Logger logger = LoggerFactory.getLogger(ExternalSettingRunner.class);
 
 //    @Value("${Ewan.name}")
 //    private String name;
@@ -22,10 +23,10 @@ public class ExternalSettingRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println("===================");
-        System.out.println(properties.getName());
-        System.out.println(properties.getAge());
-        System.out.println(properties.getSessionTimeout());
-        System.out.println("===================");
+        logger.info("===================");
+        logger.info(properties.getName());
+        logger.info(properties.getAge());
+        logger.info(properties.getSessionTimeout().toString());
+        logger.info("===================");
     }
 }
