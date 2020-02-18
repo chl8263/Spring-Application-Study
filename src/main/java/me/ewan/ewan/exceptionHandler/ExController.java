@@ -14,13 +14,13 @@ public class ExController {
         throw new Exexception();
     }
 
-//    @ExceptionHandler(Exexception.class)
-//    public @ResponseBody AppError sampleError(Exexception e){
-//        AppError appError = new AppError();
-//
-//        appError.setMessage("error.app.key");
-//        appError.setReason("IDK");
-//        return appError;
-//    }
+    @ExceptionHandler(Exexception.class)
+    public @ResponseBody AppError sampleError(Exexception e){
+        AppError appError = new AppError();
+
+        appError.setMessage("error.app.key");
+        appError.setReason("IDK");
+        return appError;
+    }
 
 }

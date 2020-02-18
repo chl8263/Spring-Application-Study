@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ExternalSettingRunner implements ApplicationRunner {
 
-    private Logger logger = LoggerFactory.getLogger(ExternalSettingRunner.class);
+    //private Logger logger = LoggerFactory.getLogger(ExternalSettingRunner.class);
 
 //    @Value("${Ewan.name}")
 //    private String name;
@@ -23,10 +23,10 @@ public class ExternalSettingRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        logger.info("===================");
-        logger.info(properties.getName());
-        logger.info(properties.getAge());
-        logger.info(properties.getSessionTimeout().toString());
-        logger.info("===================");
+//        logger.info("===================");
+//        logger.info(properties.getName());
+//        logger.info(properties.getAge());
+//        logger.info(properties.getSessionTimeout().toString());
+//        logger.info("===================");
     }
 }
