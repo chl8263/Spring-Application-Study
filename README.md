@@ -1,4 +1,4 @@
-# About Spring Framwork
+# Spring Application Study
 This repository is for exercise about spring framework, can see detail document to click.
 
 ## Spring Boot
