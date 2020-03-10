@@ -22,7 +22,7 @@ public class H2Runner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        try(Connection connection = dataSource.getConnection()){
+        try (Connection connection = dataSource.getConnection()) {
             connection.getMetaData().getURL();
             connection.getMetaData().getUserName();
 

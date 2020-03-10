@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @GetMapping("/hello")
-    public String hello(){
+    public String hello() {
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         return "hello";
     }
 
     @PostMapping("/user/create")
-    public User create(@RequestBody User user){
+    public User create(@RequestBody User user) {
         return user;
     }
 }

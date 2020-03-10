@@ -23,7 +23,7 @@ public class AccountService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public Account2 createAccount(String username, String password){
+    public Account2 createAccount(String username, String password) {
 
         Account2 account2 = new Account2();
         account2.setUserName(username);

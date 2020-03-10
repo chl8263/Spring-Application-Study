@@ -11,7 +11,7 @@ public class SampleController {
     SampleService sampleService;
 
     //@GetMapping("/hello")
-    public String hello(){
+    public String hello() {
         return sampleService.getName();
     }
 }

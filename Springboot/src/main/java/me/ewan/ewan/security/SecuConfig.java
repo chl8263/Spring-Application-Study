@@ -17,13 +17,13 @@ public class SecuConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "secu").permitAll()
                 .anyRequest().authenticated()
                 .and()
-            .formLogin()
+                .formLogin()
                 .and()
-            .httpBasic();
+                .httpBasic();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         //return NoOpPasswordEncoder.getInstance();
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }

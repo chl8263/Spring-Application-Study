@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ActuatorController {
 
     @GetMapping("/actuator")
-    public String actuator(){
+    public String actuator() {
         return "actuator";
     }
 }

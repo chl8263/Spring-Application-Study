@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class SeController {
 
     @GetMapping("/se")
-    public String hello(){
-         return "hello";
+    public String hello() {
+        return "hello";
     }
 
     @GetMapping("/my")
-    public String my(){
+    public String my() {
         return "my";
     }
 }

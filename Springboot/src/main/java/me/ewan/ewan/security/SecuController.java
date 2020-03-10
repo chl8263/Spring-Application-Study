@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class SecuController {
 
     @GetMapping("/secu")
-    public String secu(){
+    public String secu() {
         return "hello";
     }
 
     @GetMapping("/secuMy")
-    public String my(){
+    public String my() {
         return "my";
     }
 

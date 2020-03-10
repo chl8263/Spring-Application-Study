@@ -21,14 +21,14 @@ public class UserControllerTest {
     MockMvc mockMvc;
 
     @Test
-    public void hello() throws Exception{
+    public void hello() throws Exception {
         mockMvc.perform(get("/hello"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("hello"));
     }
 
     @Test
-    public void createUser_JSON() throws Exception{
+    public void createUser_JSON() throws Exception {
         String userJson = "a";
         mockMvc.perform(post("/users/create")
                 .contentType(MediaType.APPLICATION_JSON)

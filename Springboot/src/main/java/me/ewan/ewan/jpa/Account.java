@@ -8,7 +8,8 @@ import java.util.Objects;
 @Entity
 public class Account {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     private String userName;

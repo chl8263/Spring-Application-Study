@@ -31,8 +31,8 @@ public class JpaTest {
     AccountRepository accountRepository;
 
     @Test
-    public void di(){
-        try(Connection connection = dataSource.getConnection()){
+    public void di() {
+        try (Connection connection = dataSource.getConnection()) {
             DatabaseMetaData dataBaseMetaData = connection.getMetaData();
 
             System.out.println(dataBaseMetaData.getURL());

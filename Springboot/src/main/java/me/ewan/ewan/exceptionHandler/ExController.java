@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ExController {
 
     @GetMapping("/excep")
-    public String hello(){
+    public String hello() {
         throw new Exexception();
     }
 
     @ExceptionHandler(Exexception.class)
-    public @ResponseBody AppError sampleError(Exexception e){
+    public @ResponseBody
+    AppError sampleError(Exexception e) {
         AppError appError = new AppError();
 
         appError.setMessage("error.app.key");

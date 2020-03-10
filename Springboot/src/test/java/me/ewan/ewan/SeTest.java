@@ -22,7 +22,7 @@ public class SeTest {
     MockMvc mockMvc;
 
     @Test
-    public void hello() throws Exception{
+    public void hello() throws Exception {
 
         mockMvc.perform(get("/se").accept(MediaType.TEXT_HTML))
                 .andDo(print())
@@ -31,7 +31,7 @@ public class SeTest {
     }
 
     @Test
-    public void hello_without_user() throws Exception{
+    public void hello_without_user() throws Exception {
 
         mockMvc.perform(get("/se").accept(MediaType.TEXT_HTML))
                 .andDo(print())
@@ -39,7 +39,7 @@ public class SeTest {
     }
 
     @Test
-    public void my() throws Exception{
+    public void my() throws Exception {
 
         mockMvc.perform(get("/my"))
                 .andDo(print())
