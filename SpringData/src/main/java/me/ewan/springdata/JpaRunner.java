@@ -1,6 +1,7 @@
 package me.ewan.springdata;
 
 import me.ewan.springdata.domain.Account;
+import me.ewan.springdata.domain.Study;
 import org.hibernate.Session;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -23,9 +24,17 @@ public class JpaRunner implements ApplicationRunner {
         account.setName("Ewan");
         account.setPassword("930324");
 
+        Study study = new Study();
+        study.setName("Spring Data JPA");
+
+        account.addStudy(study);
+        study.setOwner(account);
+
         Session session = entityManager.unwrap(Session.class);
 
         //entityManager.persist(session);
+
         session.save(account);
+        session.save(study);
     }
 }
