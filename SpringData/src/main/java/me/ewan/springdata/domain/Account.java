@@ -6,7 +6,8 @@ import java.util.Date;
 @Entity
 public class Account {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     @Column(nullable = false, unique = true)
