@@ -14,6 +14,8 @@ public class Comment {
     @ManyToOne
     private Post post;
 
+    private String commentString;
+
     public Long getId() {
         return id;
     }
@@ -28,5 +30,13 @@ public class Comment {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public String getCommentString() {
+        return commentString;
+    }
+
+    public void setCommentString(String commentString) {
+        this.commentString = commentString;
     }
 }
