@@ -22,19 +22,33 @@ public class CommentRepositoryTest {
 
     @Test
     public void commentRepoTest(){
-        Comment comment = new Comment();
-        comment.setCommentString("Spring data jpa");
-        commentRepository.save(comment);
+        Comment commentLike100 = this.createComment(100, "Spring data JPA");
+        Comment commentLike50 = this.createComment(50, "hibernate spring");
 
-        List<Comment> comments = commentRepository.findByCommentStringContainsIgnoreCaseAAndLikeCountGreaterThan("Spring data jpa", 10);
-        assertThat(comments.size()).isEqualTo(1);
+        commentRepository.save(commentLike100);
+        commentRepository.save(commentLike50);
+
+        //List<Comment> comments = commentRepository.findByCommentStringContainsIgnoreCaseAAndLikeCountGreaterThan("Spring data jpa", 10);
+        //assertThat(comments.size()).isEqualTo(1);
+
+        List<Comment> comments = commentRepository.findByCommentStringContainsIgnoreCaseOrderByLikeCountDesc(10);
+        assertThat(comments.size()).isEqualTo(2);
+
     }
 
+    private Comment createComment(int likeCount, String commentString){
+
+        Comment comment= new Comment();
+        comment.setCommentString(commentString);
+        comment.setLikeCount(likeCount);
+
+        return comment;
+    }
 
     @Test
     public void crud(){
         Comment comment= new Comment();
-        comment.setCommentString("Hello Comment");
+        comment.setCommentString("commentString");
         commentRepository.save(comment);
 
         List<Comment> all = commentRepository.findAll();

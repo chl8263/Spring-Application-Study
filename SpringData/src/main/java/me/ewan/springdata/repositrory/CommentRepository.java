@@ -21,7 +21,9 @@ import java.util.List;
 
 public interface CommentRepository extends MyRepository<Comment, Long>{
 
-    List<Comment> findByCommentStringContainsIgnoreCaseAAndLikeCountGreaterThan(String key, int likeCount);
+    List<Comment> findByCommentStringContainsIgnoreCaseAndLikeCountGreaterThan(String key, int likeCount);
+
+    List<Comment> findByCommentStringContainsIgnoreCaseOrderByLikeCountDesc(int count);
 
 //    @Query(value = "SELECT c FROM Comment AS c", nativeQuery = true)
 //    List<Comment> findByTitle(String keyword);
