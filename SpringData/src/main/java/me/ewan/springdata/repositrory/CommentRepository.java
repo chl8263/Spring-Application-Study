@@ -23,7 +23,11 @@ public interface CommentRepository extends MyRepository<Comment, Long>{
 
     List<Comment> findByCommentStringContainsIgnoreCaseAndLikeCountGreaterThan(String key, int likeCount);
 
-    List<Comment> findByCommentStringContainsIgnoreCaseOrderByLikeCountDesc(int count);
+    List<Comment> findByCommentStringContainsIgnoreCaseOrderByLikeCountDesc(String key);
+
+    List<Comment> findByLikeCountIsGreaterThan(int count);
+
+    Page<Comment> findByCommentStringContainsIgnoreCase(String key, Pageable pageable);
 
 //    @Query(value = "SELECT c FROM Comment AS c", nativeQuery = true)
 //    List<Comment> findByTitle(String keyword);

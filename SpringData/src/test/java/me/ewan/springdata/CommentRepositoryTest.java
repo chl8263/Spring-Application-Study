@@ -6,6 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -31,9 +34,15 @@ public class CommentRepositoryTest {
         //List<Comment> comments = commentRepository.findByCommentStringContainsIgnoreCaseAAndLikeCountGreaterThan("Spring data jpa", 10);
         //assertThat(comments.size()).isEqualTo(1);
 
-        List<Comment> comments = commentRepository.findByCommentStringContainsIgnoreCaseOrderByLikeCountDesc(10);
-        assertThat(comments.size()).isEqualTo(2);
+        List<Comment> comments = commentRepository.findByCommentStringContainsIgnoreCaseOrderByLikeCountDesc("Spring data JPA");
+        assertThat(comments.size()).isEqualTo(1);
+        assertThat(comments).first().hasFieldOrPropertyWithValue("likeCount", 100);
 
+        PageRequest page = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "likeCount"));
+
+        Page<Comment> commentPage = commentRepository.findByCommentStringContainsIgnoreCase("Spring", page);
+
+        assertThat(commentPage.getNumberOfElements()).isEqualTo(2);
     }
 
     private Comment createComment(int likeCount, String commentString){
