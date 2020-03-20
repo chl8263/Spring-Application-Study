@@ -8,6 +8,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.RepositoryDefinition;
+import org.springframework.scheduling.annotation.Async;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public interface CommentRepository extends MyRepository<Comment, Long>{
 
     List<Comment> findByCommentStringContainsIgnoreCaseOrderByLikeCountDesc(String key);
 
+    @Async
     List<Comment> findByLikeCountIsGreaterThan(int count);
 
     Page<Comment> findByCommentStringContainsIgnoreCase(String key, Pageable pageable);
