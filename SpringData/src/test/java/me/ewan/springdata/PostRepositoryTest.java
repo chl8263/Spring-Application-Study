@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest    //For slicing test, if want to test just repository, can use this and when use this one, can enroll just repository
 public class PostRepositoryTest {
 
-    @Autowired
+    //@Autowired
     PostRepository postRepository;
 
     @Test

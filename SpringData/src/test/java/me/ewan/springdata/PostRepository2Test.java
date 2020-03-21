@@ -17,10 +17,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 public class PostRepository2Test {
 
-    @Autowired
-    PostRepository2 postRepository;
+//    @Autowired
+//    PostRepository2 postRepository;
 
-    @Autowired
+    //@Autowired
     CustomPostRepository customPostRepository;
 
     @Test
@@ -28,7 +28,7 @@ public class PostRepository2Test {
         Post2 post = new Post2();
         post.setTitle("hibernate");
 
-        assertThat(customPostRepository.contains(post)).isTrue();
+        //assertThat(customPostRepository.contains(post)).isTrue();
     }
 
     @Test
@@ -37,10 +37,10 @@ public class PostRepository2Test {
         Post2 post = new Post2();
         post.setTitle("hibernate");
 
-        postRepository.save(post);
-        postRepository.findMyPost();
-        postRepository.delete(post);
-
-        postRepository.flush();
+//        postRepository.save(post);
+//        postRepository.findMyPost();
+//        postRepository.delete(post);
+//
+//        postRepository.flush();
     }
 }

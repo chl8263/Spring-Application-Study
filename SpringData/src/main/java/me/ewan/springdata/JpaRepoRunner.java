@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 
-@Component
+//@Component
 public class JpaRepoRunner implements ApplicationRunner {
 
-    @Autowired
+    //@Autowired
     PostRepository postRepository;
 
     @Transactional

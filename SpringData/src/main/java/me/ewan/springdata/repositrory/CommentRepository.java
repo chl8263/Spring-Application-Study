@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.RepositoryDefinition;
 import org.springframework.scheduling.annotation.Async;
 
@@ -20,6 +21,7 @@ import java.util.List;
 //    List<Comment> findAll();
 //}
 
+@NoRepositoryBean
 public interface CommentRepository extends MyRepository<Comment, Long>{
 
     List<Comment> findByCommentStringContainsIgnoreCaseAndLikeCountGreaterThan(String key, int likeCount);

@@ -1,11 +1,15 @@
 package me.ewan.springdata;
 
 import me.ewan.springdata.domain.Comment;
+import me.ewan.springdata.domain.Post2;
+import me.ewan.springdata.event.PostPublishedEvent;
 import me.ewan.springdata.repositrory.CommentRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -18,10 +22,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
+@Import(PostRepositoryTestConfig.class)
 public class CommentRepositoryTest {
 
-    @Autowired
+    //@Autowired
     CommentRepository commentRepository;
+
+    @Autowired
+    ApplicationContext applicationContext;
+
+    @Test
+    public void contextTest(){
+        Post2 post = new Post2();
+        post.setTitle("event");
+        PostPublishedEvent event = new PostPublishedEvent<Post2>(post);
+
+        applicationContext.publishEvent(event);
+    }
 
     @Test
     public void commentRepoTest(){
