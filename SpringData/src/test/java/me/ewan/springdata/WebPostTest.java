@@ -38,4 +38,20 @@ public class WebPostTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("jpa"));
     }
+
+    @Test
+    public void getPosts() throws Exception {
+        WebPost webPost = new WebPost();
+        webPost.setTitle("jpa");
+        webPostRepository.save(webPost);
+
+        mockMvc.perform(get("/posts/")
+//                        .param("page", "0")
+//                        .param("size", "10")
+//                        .param("sort", "created,desc")
+//                        .param("sort", "title")
+                    )
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 }

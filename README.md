@@ -31,4 +31,24 @@ This repository is for exercise about spring framework, can see detail document 
 
 - [Relation Mapping](https://github.com/chl8263/Spring-Application-Study/blob/master/SpringData/document/4.Relation%20Mapping.md)
 
+- [Cascade and Fetch](https://github.com/chl8263/Spring-Application-Study/blob/master/SpringData/document/5.Cascade%20and%20Fetch.md)
+
+- [JPA - Query](https://github.com/chl8263/Spring-Application-Study/blob/master/SpringData/document/6.%20JPA%20-%20Query.md)
+
+- [Spring data basic JPA](https://github.com/chl8263/Spring-Application-Study/blob/master/SpringData/document/7.%20Spring%20data%20basic%20JPA.md)
+
+- [Spring data Common Repository](https://github.com/chl8263/Spring-Application-Study/blob/master/SpringData/document/8.%20Spring%20data%20Common%20Repository.md)
+
+- [Spring data Common Null](https://github.com/chl8263/Spring-Application-Study/blob/master/SpringData/document/9.%20Spring%20data%20Common%20Null.md)
+
+- [Spring data make query](https://github.com/chl8263/Spring-Application-Study/blob/master/SpringData/document/10.%20Spring%20data%20make%20query.md)
+
+- [Spring data Custom Repository](https://github.com/chl8263/Spring-Application-Study/blob/master/SpringData/document/11.%20Spring%20data%20Custom%20Repository.md)
+
+- [Spring data Base Repository Customizing](https://github.com/chl8263/Spring-Application-Study/blob/master/SpringData/document/12.%20Spring%20data%20Base%20Repository%20Customizing.md)
+
+
+
+
+5.Cascade and Fetch
 
