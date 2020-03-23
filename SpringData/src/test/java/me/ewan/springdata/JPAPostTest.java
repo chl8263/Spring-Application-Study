@@ -28,10 +28,12 @@ public class JPAPostTest {
     @Test
     public void updateTitle(){
         WebPost webPost = new WebPost();
-        //webPost.setId(1L);
+        webPost.setId(1L);
         webPost.setTitle("jpa");
-        webPost.setTitle("jpa2");
-        //WebPost savedWebPost = webPostRepository.save(webPost);
+
+        WebPost savedWebPost = webPostRepository.save(webPost);
+
+        savedWebPost.setTitle("jpa2");
 
 //        int update = webPostRepository.updateTitle("jpa2", webPost.getId());
 //        assertThat(update).isEqualTo(1);
