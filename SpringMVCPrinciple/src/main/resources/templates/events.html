@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Event</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Limit</th>
+            <th>Start</th>
+            <th>End</th>
+        </tr>
+
+        <tr th:each="event: ${events}">
+            <th th:text="${event.name}">Evnet Name</th>
+            <th th:text="${event.limitOfEnrollment}">100</th>
+            <th th:text="${event.startDateTime}">2020-03-01 : 10 AM</th>
+            <th th:text="${event.endDateTime}">2020-03-01 : 12 PM</th>
+        </tr>
+    <table>
+
+</body>
+</html>
