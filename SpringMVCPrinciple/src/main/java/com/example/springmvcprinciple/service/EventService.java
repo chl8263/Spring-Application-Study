@@ -1,6 +1,8 @@
 package com.example.springmvcprinciple.service;
 
 import com.example.springmvcprinciple.domain.Event;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
