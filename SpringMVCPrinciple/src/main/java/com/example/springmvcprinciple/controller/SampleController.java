@@ -19,4 +19,9 @@ public class SampleController {
     public @ResponseBody String message(@RequestBody Person person){
         return "hello person";
     }
+
+    @GetMapping("/jsonMessage")
+    public Person jsonMessage(@RequestBody Person person){
+        return person;
+    }
 }
