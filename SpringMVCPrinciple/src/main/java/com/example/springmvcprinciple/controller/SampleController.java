@@ -2,10 +2,7 @@ package com.example.springmvcprinciple.controller;
 
 import com.example.springmvcprinciple.domain.Person;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class SampleController {
@@ -16,5 +13,10 @@ public class SampleController {
     //public String hello(@RequestParam("name") Person person){
     public String hello(@RequestParam("id") Person person){
         return "hello " + person.getName();
+    }
+
+    @GetMapping("/message")
+    public @ResponseBody String message(@RequestBody Person person){
+        return "hello person";
     }
 }
