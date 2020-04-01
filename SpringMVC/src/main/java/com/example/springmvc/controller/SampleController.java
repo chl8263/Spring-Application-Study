@@ -1,5 +1,7 @@
 package com.example.springmvc.controller;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,24 @@ public class SampleController {
     @RequestMapping({"/hello" , "hi"})
     @ResponseBody
     public String hello(){
+        return "hello";
+    }
+
+    @RequestMapping("/hello/*")
+    @ResponseBody
+    public String hello2(){
+        return "hello";
+    }
+
+    @RequestMapping("/hello/**")
+    @ResponseBody
+    public String hello3(){
+        return "hello";
+    }
+
+    @RequestMapping(value = "/hello/", consumes = MediaType.APPLICATION_JSON_VALUE, headers = HttpHeaders.ACCEPT)
+    @ResponseBody
+    public String hello4(){
         return "hello";
     }
 }
