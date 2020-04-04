@@ -1,5 +1,6 @@
 package com.example.springmvc.controller;
 
+import com.example.springmvc.annotation.GetHelloMapping;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -36,5 +37,11 @@ public class SampleController {
     @ResponseBody
     public String hello4(){
         return "hello";
+    }
+
+    @GetHelloMapping
+    @ResponseBody
+    public String hello5(){
+        return "hello111";
     }
 }

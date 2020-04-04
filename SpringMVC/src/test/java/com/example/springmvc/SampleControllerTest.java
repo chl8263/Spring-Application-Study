@@ -23,6 +23,13 @@ public class SampleControllerTest {
     MockMvc mockMvc;
 
     @Test
+    public void customAnnocationTest() throws Exception {
+        mockMvc.perform(get("/hello1"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
     public void mediaTypeTest() throws Exception {
         mockMvc.perform(get("/hello")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
