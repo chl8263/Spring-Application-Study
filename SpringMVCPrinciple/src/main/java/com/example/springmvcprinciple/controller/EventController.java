@@ -12,6 +12,12 @@ public class EventController {
     //@Autowired
     private EventService service;
 
+    @GetMapping("/event")
+    public String events2(Model model){
+        model.addAttribute("events", service.getEvents());
+        return "events";
+    }
+
     //@RequestMapping(value = "/events", method = RequestMethod.GET)
     @GetMapping("/event")
     public String events(Model model){

@@ -1,6 +1,5 @@
 package com.example.springmvc;
 
-import com.example.springmvc.controller.EventController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +9,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @RunWith(SpringRunner.class)
@@ -23,8 +22,16 @@ public class EventsControllerTest {
     private MockMvc mockMvc;
 
     @Test
+    public void test2() throws Exception {
+        mockMvc.perform(post("/event?name=ewan"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").value("ewan"));
+    }
+
+    @Test
     public void test1() throws Exception {
-        mockMvc.perform(get("/events"))
+        mockMvc.perform(get("/templates/events"))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
