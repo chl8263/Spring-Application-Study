@@ -5,11 +5,14 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.jws.WebResult;
 import javax.print.attribute.standard.Media;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -18,25 +21,24 @@ public class EventController {
 
     @GetMapping("/events/form")
     public String eventsForm(Model model){
-//        Event event = new Event();
-//        model.addAttribute("event", event);
-
+        Event event = new Event();
+        model.addAttribute("event", event);
         return "events/form";
     }
 
     @PostMapping("/eventss")
-    @ResponseBody
     //public Event eventss(@RequestParam(required = false, defaultValue = "ewan") String name, @RequestParam Integer age){
-    public Event eventss(@Valid @ModelAttribute Event event, BindingResult bindingResult){
+    public String createEvent(@Validated @ModelAttribute Event event, BindingResult bindingResult, Model model){
 
         if(bindingResult.hasErrors()){
-            System.out.println("===========");
-            bindingResult.getAllErrors().forEach(x -> {
-                System.out.println(x.toString());
-            });
+            return "events/form";
         }
 
-        return event;
+        List<Event> eventList = new ArrayList<>();
+        eventList.add(event);
+        model.addAttribute("eventList", eventList);
+
+        return "events/list";
     }
 
     @PostMapping("/event")

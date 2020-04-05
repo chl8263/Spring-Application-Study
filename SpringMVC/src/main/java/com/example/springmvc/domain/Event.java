@@ -1,9 +1,14 @@
 package com.example.springmvc.domain;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
 public class Event {
 
+    @NotBlank
     private String name;
 
+    @Min(0)
     private int age;
 
     public String getName() {
