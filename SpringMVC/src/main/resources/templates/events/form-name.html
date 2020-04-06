@@ -6,11 +6,8 @@
 </head>
 <body>
 
-<div th:text="${visitTime}"/>
-
-<form action="#" th:action="@{/eventss}" method="post", th:object="${event}">
+<form action="#" th:action="@{/eventss/form/name}" method="post", th:object="${event}">
     <input type="text" title="name" th:field="*{name}"/>
-    <input type="text" title="age" th:field="*{age}"/>
     <input type="submit" value="Create"/>
 </form>
 

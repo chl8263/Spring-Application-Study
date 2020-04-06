@@ -11,18 +11,29 @@ import org.springframework.web.bind.annotation.*;
 import javax.jws.WebResult;
 import javax.print.attribute.standard.Media;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
 @Controller
+@SessionAttributes("event")
 public class EventController {
 
-    @GetMapping("/events/form")
-    public String eventsForm(Model model){
+    @GetMapping("/events/form/name")
+    public String eventsFormName(Model model){
         Event event = new Event();
         model.addAttribute("event", event);
+        return "events/form-name";
+    }
+
+    @GetMapping("/events/form")
+    public String eventsForm(Model model, @SessionAttribute LocalDateTime visitTime){
+        Event event = new Event();
+        model.addAttribute("event", event);
+        model.addAttribute("visitTime", visitTime);
+        System.out.println(visitTime);
         return "events/form";
     }
 
