@@ -22,14 +22,14 @@ public class FileController {
     private ResourceLoader resourceLoader;
 
     @GetMapping("/file")
-    public String fileUploadForm(Model model){
+    public String fileUploadForm(Model model) {
 
         model.getAttribute("message");
         return "files/index";
     }
 
     @PostMapping("/file")
-    public String fileUpload(@RequestParam MultipartFile file, RedirectAttributes redirectAttributes){
+    public String fileUpload(@RequestParam MultipartFile file, RedirectAttributes redirectAttributes) {
         //
         String message = file.getOriginalFilename() + "is upload";
 
@@ -40,7 +40,7 @@ public class FileController {
     @GetMapping("file/{fileName}")
     @ResponseBody
     public ResponseEntity fileDownLoad(@PathVariable String fileName) throws IOException {
-        Resource resource = resourceLoader.getResource("classpath:"+fileName);
+        Resource resource = resourceLoader.getResource("classpath:" + fileName);
 
         File file = resource.getFile();
 
@@ -54,4 +54,3 @@ public class FileController {
                 .body(resource);
     }
 }
-
