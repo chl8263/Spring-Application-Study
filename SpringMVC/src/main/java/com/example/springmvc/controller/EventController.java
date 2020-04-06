@@ -22,6 +22,24 @@ import java.util.TimeZone;
 @SessionAttributes("event")
 public class EventController {
 
+    @ModelAttribute("categories")
+    public void categories(Model model){
+        List<String> list = new ArrayList<String>();
+        list.add("study");
+        list.add("study2");
+        list.add("study3");
+
+        model.addAttribute("categories", list);
+    }
+
+    @GetMapping("/events2323")
+    @ResponseBody
+    //@ModelAttribute("categories")
+    public String events(Model model){
+        List<String> aa = (List<String>) model.getAttribute("categories");
+        return aa.get(0);
+    }
+
     @GetMapping("/events/form/name")
     public String eventsFormName(Model model){
         Event event = new Event();

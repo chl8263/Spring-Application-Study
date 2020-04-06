@@ -32,20 +32,20 @@ public class EventApi {
         return event;
     }
 
-    @PostMapping
-    public ResponseEntity<Event> eventEvent2(@Validated Event event, BindingResult bindingResult){
-        //public Event eventEvent(HttpEntity<Event> request){
-        // save event
-
-        //MediaType mediaType = request.getHeaders().getContentType();
-        //System.out.println(mediaType);
-
-        if(bindingResult.hasErrors()){
-            bindingResult.getAllErrors().forEach(x -> {
-                System.out.println(x);
-            });
-        }
-
-        return ResponseEntity.ok(event);
-    }
+//    @PostMapping
+//    public ResponseEntity<Event> eventEvent2(@Validated Event event, BindingResult bindingResult){
+//        //public Event eventEvent(HttpEntity<Event> request){
+//        // save event
+//
+//        //MediaType mediaType = request.getHeaders().getContentType();
+//        //System.out.println(mediaType);
+//
+//        if(bindingResult.hasErrors()){
+//            bindingResult.getAllErrors().forEach(x -> {
+//                System.out.println(x);
+//            });
+//        }
+//
+//        return ResponseEntity.ok(event);
+//    }
 }
