@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.jws.WebResult;
 import javax.print.attribute.standard.Media;
@@ -35,6 +36,15 @@ public class EventController {
         model.addAttribute("visitTime", visitTime);
         System.out.println(visitTime);
         return "events/form";
+    }
+
+    @GetMapping("/events/form/redirect")
+    public String eventsFormRedirect(RedirectAttributes redirectAttributes, @SessionAttribute LocalDateTime visitTime){
+        Event event = new Event();
+        redirectAttributes.addAttribute("name", "ewan");
+        redirectAttributes.addAttribute("visitTime", visitTime);
+        System.out.println(visitTime);
+        return "redirect:/events/form";
     }
 
     @PostMapping("/eventss")
