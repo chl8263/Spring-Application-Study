@@ -1,6 +1,7 @@
 package com.example.springmvc.controller;
 
 import com.example.springmvc.domain.Event;
+import com.example.springmvc.exception.EventException;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,12 @@ import java.util.TimeZone;
 @Controller
 @SessionAttributes("event")
 public class EventController {
+
+    @ExceptionHandler
+    public String eventErrorHandler(EventException e, Model model){
+        model.addAttribute("message", "event error");
+        return "error";
+    }
 
     @InitBinder
     public void initEventBinder(WebDataBinder webDataBinder){
