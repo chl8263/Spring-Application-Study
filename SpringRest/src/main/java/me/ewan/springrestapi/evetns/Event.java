@@ -1,10 +1,11 @@
 package me.ewan.springrestapi.evetns;
 
-import lombok.Builder;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Builder
+@Builder @AllArgsConstructor @NoArgsConstructor
+@Getter @Setter @EqualsAndHashCode(of = "id")
 public class Event {
 
     private Integer id;
