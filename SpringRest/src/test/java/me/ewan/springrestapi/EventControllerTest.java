@@ -1,6 +1,7 @@
 package me.ewan.springrestapi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import me.ewan.springrestapi.common.TestDescription;
 import me.ewan.springrestapi.evetns.Event;
 import me.ewan.springrestapi.evetns.EventDto;
 import me.ewan.springrestapi.evetns.EventRepository;
@@ -40,6 +41,7 @@ public class EventControllerTest {
     ObjectMapper objectMapper;
 
     @Test
+    @TestDescription("Not working test when input which cannot use")
     public void createEvent_Bad_Request() throws Exception{
 
         EventDto event = EventDto.builder()
@@ -74,6 +76,7 @@ public class EventControllerTest {
     }
 
     @Test
+    @TestDescription("Working fine test")
     public void createEvent() throws Exception{
 
         Event event = Event.builder()
@@ -113,6 +116,7 @@ public class EventControllerTest {
     }
 
     @Test
+    @TestDescription("Not working test when input empty")
     public void createEvent_Bad_Request_Empty_Input() throws Exception {
         EventDto eventDto = EventDto.builder().build();
 
@@ -123,6 +127,7 @@ public class EventControllerTest {
     }
 
     @Test
+    @TestDescription("Not working test when input has wrong value")
     public void createEvent_Bad_Request_Wrong_Input() throws Exception {
         EventDto eventDto = EventDto.builder()
                 .name("Spring")
