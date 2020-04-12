@@ -29,20 +29,9 @@ public class EventController {
     @PostMapping
     public ResponseEntity createEvent(@RequestBody EventDto eventDto){
 
-        System.out.println(eventDto.getEndEventDateTime());
-
         Event event = modelMapper.map(eventDto, Event.class);
-
-        System.out.println(event.getEndEventDateTime());
-
-
         Event newEvent = this.eventRepository.save(event);
 
-        if(newEvent == null) System.out.println("sexxxxxxxxxxxxxxxxx");
-
-        System.out.println(newEvent.getEndEventDateTime());
-
-        System.out.println(newEvent.getId());
         URI createdUri = linkTo(EventController.class).slash(newEvent.getId()).toUri();
         //event.setId(10);
         return ResponseEntity.created(createdUri).body(event);
