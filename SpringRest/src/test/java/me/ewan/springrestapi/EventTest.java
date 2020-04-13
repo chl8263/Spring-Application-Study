@@ -80,6 +80,7 @@ public class EventTest {
                 .location("Seattle")
                 .build();
 
+
         //when
         event.update();
 
