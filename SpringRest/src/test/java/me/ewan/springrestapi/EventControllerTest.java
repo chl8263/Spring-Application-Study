@@ -79,7 +79,7 @@ public class EventControllerTest {
     @TestDescription("Working fine test")
     public void createEvent() throws Exception{
 
-        Event event = Event.builder()
+        EventDto event = EventDto.builder()
                 .name("Spring")
                 .description("REST API Development with spring")
                 .beginEnrollmentDateTime(LocalDateTime.of(2018, 11, 23, 14, 21))
@@ -89,10 +89,10 @@ public class EventControllerTest {
                 .basePrice(100)
                 .maxPrice(200)
                 .limitOfEnrollment(100)
-                .location("Seattle HACK js")
-                .free(true)
-                .offline(false)
-                .eventStatus(EventStatus.PUBLISHED)
+//                .location("Seattle HACK js")
+//                .free(true)
+//                .offline(false)
+//                .eventStatus(EventStatus.PUBLISHED)
                 .build()
                 ;
 
@@ -105,13 +105,16 @@ public class EventControllerTest {
                         .accept(MediaTypes.HAL_JSON)
                         .content(objectMapper.writeValueAsString(event)))
                 .andDo(print())
-                .andExpect(status().isBadRequest())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("id").exists())
                 .andExpect(header().exists(HttpHeaders.LOCATION))
                 .andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaTypes.HAL_JSON_VALUE))
                 .andExpect(jsonPath("free").value(false))
-                .andExpect(jsonPath("offline").value(true))
+                .andExpect(jsonPath("offline").value(false))
                 .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()))
+                .andExpect(jsonPath("_links.self").exists())
+                .andExpect(jsonPath("_links.query-events").exists())
+                .andExpect(jsonPath("_links.update-events").exists())
         ;
     }
 
