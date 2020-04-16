@@ -2,3 +2,17 @@ spring:
   jackson:
     deserialization:
       fail-on-unknown-properties : true
+
+  datasource:
+    url: jdbc:postgresql://10.0.0.204:5432/postgres
+    username: postgres
+    password: 930324
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate.format_sql: true
+    show-sql: true
+
+logging.level.org.hibernate.type.descriptor.sql: trace
