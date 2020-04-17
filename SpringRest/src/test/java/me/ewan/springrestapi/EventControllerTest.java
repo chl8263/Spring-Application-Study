@@ -225,7 +225,7 @@ public class EventControllerTest {
             this.generateEvent(i);
         });
 
-        //when
+        //when Then
         this.mockMvc.perform(get("/api/events")
                     .param("page", "1")
                     .param("size", "10")
@@ -240,14 +240,38 @@ public class EventControllerTest {
         ;
     }
 
-    private void generateEvent(int i){
+    private Event generateEvent(int i){
         Event event = Event.builder()
                 .name("event" + i)
                 .description("test event")
                 .build()
                 ;
 
-        this.eventRepository.save(event);
+        return this.eventRepository.save(event);
+    }
+
+    @Test
+    @TestDescription("Searching for existing onw events")
+    public void getEvent() throws Exception{
+        //Given
+        Event event = this.generateEvent(100);
+
+        //When Then
+        this.mockMvc.perform(get("/api/events/{id}", event.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("id").exists())
+                .andExpect(jsonPath("name").exists())
+                .andExpect(jsonPath("_links.self").exists())
+                .andExpect(jsonPath("_links.profile").exists())
+        ;
+    }
+
+    @Test
+    @TestDescription("Responsing 404 error when search not exists event")
+    public void getEvent404() throws Exception{
+        this.mockMvc.perform(get("/api/events/11883"))
+                .andExpect(status().isNotFound())
+        ;
     }
 
 }
