@@ -86,7 +86,6 @@ public class EventControllerTest extends BaseControllerTest {
 //                .eventStatus(EventStatus.PUBLISHED)
                 .build()
                 ;
-
         //event.setId(10);
 
         //Mockito.when(eventRepository.save(any(Event.class))).thenReturn(event);
