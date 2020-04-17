@@ -16,6 +16,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.xml.ws.Response;
 import java.net.URI;
 import java.util.Optional;
 
@@ -83,6 +84,35 @@ public class EventController {
         Event event = optionalEvent.get();
         EventResource eventResource = new EventResource(event);
 
+        eventResource.add(new Link("/docs/index.html#resource-events-list").withRel("profile"));
+
+        return ResponseEntity.ok(eventResource);
+    }
+
+    @PutMapping
+    public ResponseEntity updateEvent(@PathVariable Long id, @RequestBody @Valid EventDto eventDto, Errors errors){
+
+        Optional<Event> eventOptional = eventRepository.findById(id);
+
+        if(!eventOptional.isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+
+        if(errors.hasErrors()){
+            return ResponseEntity.badRequest().build();
+        }
+
+        this.eventValidator.validate(eventDto, errors);
+        if(errors.hasErrors()){
+            return ResponseEntity.badRequest().build();
+        }
+
+        Event existEvent = eventOptional.get();
+        this.modelMapper.map(eventDto, existEvent);
+
+        Event updatedEvent = eventRepository.save(existEvent);
+
+        EventResource eventResource = new EventResource(updatedEvent);
         eventResource.add(new Link("/docs/index.html#resource-events-list").withRel("profile"));
 
         return ResponseEntity.ok(eventResource);
