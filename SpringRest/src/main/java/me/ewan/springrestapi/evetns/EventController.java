@@ -3,13 +3,17 @@ package me.ewan.springrestapi.evetns;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
-import org.springframework.hateoas.MediaTypes;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.*;
 import org.springframework.hateoas.server.mvc.ControllerLinkBuilder;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,5 +63,15 @@ public class EventController {
         //eventResource.add(webMvcLinkBuilder.withSelfRel());
         eventResource.add(webMvcLinkBuilder.withRel("update-events"));
         return ResponseEntity.created(createdUri).body(eventResource);
+    }
+
+    @GetMapping
+    public ResponseEntity queryEvents(Pageable pageable, PagedResourcesAssembler<Event> assembler){
+        Page<Event> page = this.eventRepository.findAll(pageable);
+        PagedModel<RepresentationModel<?>> entityModels = assembler.toModel(page, e -> new EventResource(e));
+        entityModels.add(new Link("/docs/index.html#resource-events-list").withRel("profile"));
+        entityModels.add(new Link("/docs/index.html#resource-events-list").withRel("profile"));
+
+        return ResponseEntity.ok(entityModels);//(this.eventRepository.findAll(pageable));
     }
 }
