@@ -10,7 +10,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     properties:
       hibernate.format_sql: true
     show-sql: true
@@ -20,3 +20,11 @@ logging:
         org:
           hibernate.type.descriptor.sql: trace
           springframwork.security: DEBUG
+
+my-app:
+  admin-password: admin
+  admin-username: admin@email.com
+  user-username: user@email.com
+  user-password: user
+  client-id: myApp
+  client-secret: pass

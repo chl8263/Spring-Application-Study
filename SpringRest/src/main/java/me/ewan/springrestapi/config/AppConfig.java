@@ -2,8 +2,10 @@ package me.ewan.springrestapi.config;
 
 import me.ewan.springrestapi.Application;
 import me.ewan.springrestapi.account.Account;
+import me.ewan.springrestapi.account.AccountRepository;
 import me.ewan.springrestapi.account.AccountRole;
 import me.ewan.springrestapi.account.AccountService;
+import me.ewan.springrestapi.common.AppProperties;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -36,15 +38,27 @@ public class AppConfig {
             @Autowired
             AccountService accountService;
 
+            @Autowired
+            AppProperties appProperties;
+
             @Override
             public void run(ApplicationArguments args) throws Exception {
-                Account account = Account.builder()
-                        .email("ewan@email.com")
-                        .password("ewan")
+
+                Account admin = Account.builder()
+                        .email(appProperties.getAdminUsername())
+                        .password(appProperties.getAdminPassword())
                         .roles(new HashSet<>(Arrays.asList(AccountRole.ADMIN, AccountRole.USER)))
                         .build();
 
-                accountService.saveAccount(account);
+                accountService.saveAccount(admin);
+
+                Account user = Account.builder()
+                        .email(appProperties.getUserUsername())
+                        .password(appProperties.getUserPassword())
+                        .roles(new HashSet<>(Arrays.asList(AccountRole.ADMIN, AccountRole.USER)))
+                        .build();
+
+                accountService.saveAccount(user);
             }
         };
     }
