@@ -1,5 +1,6 @@
 package me.ewan.springrestapi.evetns;
 
+import me.ewan.springrestapi.account.AccountAdapter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -11,6 +12,10 @@ import org.springframework.hateoas.server.mvc.ControllerLinkBuilder;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +45,6 @@ public class EventController {
     @PostMapping
     public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors){
 
-        System.out.println("");
 
         if(errors.hasErrors()){
             return ResponseEntity.badRequest().body(errors);//.build();
@@ -65,9 +69,19 @@ public class EventController {
     }
 
     @GetMapping
-    public ResponseEntity queryEvents(Pageable pageable, PagedResourcesAssembler<Event> assembler){
+    public ResponseEntity queryEvents(Pageable pageable, PagedResourcesAssembler<Event> assembler, @AuthenticationPrincipal AccountAdapter user){
+
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        User user = (User) authentication.getPrincipal();
+
+
         Page<Event> page = this.eventRepository.findAll(pageable);
         PagedModel<RepresentationModel<?>> entityModels = assembler.toModel(page, e -> new EventResource(e));
+
+        if(user != null){
+            entityModels.add(linkTo(EventController.class).withRel("create-event"));
+        }
+
         entityModels.add(new Link("/docs/index.html#resource-events-list").withRel("profile"));
         entityModels.add(new Link("/docs/index.html#resource-events-list").withRel("profile"));
 

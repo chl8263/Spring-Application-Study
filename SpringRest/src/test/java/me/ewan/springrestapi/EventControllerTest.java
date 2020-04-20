@@ -244,7 +244,32 @@ public class EventControllerTest extends BaseControllerTest {
                 .andExpect(jsonPath("$[0].ObjectName").exists())
                 .andExpect(jsonPath("$[0].Field").exists())
                 .andExpect(jsonPath("$[0].Code").exists())
-                .andExpect(jsonPath("$[0].rejectedValue").exists())
+                .andExpect(jsonPath("_links.create-event").exists())
+        ;
+    }
+
+    @Test
+    @TestDescription("Search the second page of 30 events for 10")
+    public void queryEventsWithAuth() throws Exception{
+        //Given
+        IntStream.range(0, 30).forEach(i -> {
+            this.generateEvent(i);
+        });
+
+        //when Then
+        this.mockMvc.perform(get("/api/events")
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + getAccessToken())
+                .param("page", "1")
+                .param("size", "10")
+                .param("sort", "name,DESC")
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("page").exists())
+                .andExpect(jsonPath("_embedded.eventResourceList[0]._links.self").exists())
+                .andExpect(jsonPath("_links.self").exists())
+                .andExpect(jsonPath("_links.profile").exists())
+                .andExpect(jsonPath("_links.profile").exists())
         ;
     }
 
