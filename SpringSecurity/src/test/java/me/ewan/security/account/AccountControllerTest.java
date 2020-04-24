@@ -10,9 +10,13 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.anonymous;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -24,6 +28,9 @@ public class AccountControllerTest {
 
     @Autowired
     MockMvc mockMvc;
+
+    @Autowired
+    AccountService accountService;
 
     @Test
     @WithAnonymousUser
@@ -63,5 +70,41 @@ public class AccountControllerTest {
         mockMvc.perform(get("/admin"))
                 .andDo(print())
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    @Transactional
+    public void login_success() throws Exception{
+
+        String name = "ewan";
+        String pw = "123";
+
+        Account account = createUser(name, pw);
+
+        mockMvc.perform(formLogin().user(name).password(pw))
+                .andExpect(authenticated());
+    }
+
+    @Test
+    @Transactional
+    public void login_fail() throws Exception{
+
+        String name = "ewan";
+        String pw = "123";
+
+        Account account = createUser(name, pw);
+
+        mockMvc.perform(formLogin().user("ewan2").password(pw))
+                .andExpect(unauthenticated());
+    }
+
+    private Account createUser(String name, String pw){
+        Account account = Account.builder()
+                .username(name)
+                .password(pw)
+                .role("USER")
+                .build();
+
+        return accountService.createNew(account);
     }
 }
