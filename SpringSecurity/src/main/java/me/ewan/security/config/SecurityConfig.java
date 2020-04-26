@@ -57,6 +57,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .httpBasic()
         ;
 
+        http.logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+        ;
+
         SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL); //Share security context, if create new Thread
     }
 
