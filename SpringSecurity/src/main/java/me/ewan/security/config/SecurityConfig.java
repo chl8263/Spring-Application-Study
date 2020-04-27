@@ -3,8 +3,11 @@ package me.ewan.security.config;
 import com.sun.org.apache.xml.internal.utils.res.XResources_it;
 import me.ewan.security.Common.LoggingFilter;
 import me.ewan.security.account.AccountService;
+import me.ewan.security.account.LoginfailureHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDecisionVoter;
@@ -19,16 +22,21 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.access.expression.WebExpressionVoter;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import javax.persistence.Access;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +47,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     AccountService accountService;
+
+    @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {return new LoginfailureHandler();}
+
+    @Bean
+    public SessionRegistry sessionRegistry() {return new SessionRegistryImpl(); }
+
+    @Bean
+    public static ServletListenerRegistrationBean servletListenerRegistrationBean(){return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());}
 
     public SecurityExpressionHandler expressionHandler(){
 
@@ -59,7 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.addFilterBefore(new LoggingFilter(), WebAsyncManagerIntegrationFilter.class);
+        //http.addFilterBefore(new LoggingFilter(), WebAsyncManagerIntegrationFilter.class);
 
         http.authorizeRequests()
                 .mvcMatchers("/", "info", "account/**", "signup").permitAll()
@@ -68,17 +85,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .anyRequest().authenticated()
                 .expressionHandler(expressionHandler())
-                ;
+        ;
+
         http.formLogin()
                 //.usernameParameter("my-username")
                 //.passwordParameter("my-password")
                 .loginPage("/login").permitAll()
+                .failureHandler(authenticationFailureHandler())
         ;
 
-        http.rememberMe()
-                .rememberMeParameter("remember-me")
-                .userDetailsService(accountService)
-                .key("remember-me-sample");
+//        http.rememberMe()
+//                .rememberMeParameter("remember-me")
+//                .userDetailsService(accountService)
+//                .key("remember-me-sample");
 
         http.httpBasic();
 

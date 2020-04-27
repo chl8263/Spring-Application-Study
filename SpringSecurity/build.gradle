@@ -19,6 +19,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security:'
 	implementation 'com.h2database:h2'
 	implementation 'org.projectlombok:lombok'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE'
 
 	annotationProcessor 'org.projectlombok:lombok'
 
