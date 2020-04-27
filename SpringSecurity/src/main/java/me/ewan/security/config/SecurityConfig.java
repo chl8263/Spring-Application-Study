@@ -51,9 +51,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationFailureHandler authenticationFailureHandler() {return new LoginfailureHandler();}
 
+    /*
+    * For session out when logout
+    * */
     @Bean
     public SessionRegistry sessionRegistry() {return new SessionRegistryImpl(); }
 
+    /*
+     * For session out when logout
+     * */
     @Bean
     public static ServletListenerRegistrationBean servletListenerRegistrationBean(){return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());}
 
