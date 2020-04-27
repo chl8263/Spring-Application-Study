@@ -15,6 +15,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.expression.SecurityExpressionHandler;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.access.vote.AffirmativeBased;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -62,6 +63,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * */
     @Bean
     public static ServletListenerRegistrationBean servletListenerRegistrationBean(){return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());}
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManager() throws Exception {return super.authenticationManagerBean(); }
 
     public SecurityExpressionHandler expressionHandler(){
 

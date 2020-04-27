@@ -2,6 +2,7 @@ package me.ewan.security.form;
 
 import me.ewan.security.Common.SecurityLogger;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +13,7 @@ import java.util.Collection;
 @Service
 public class SampleService {
 
+    @Secured("ROLE_USER")
     public void dashBoard() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal(); // user
