@@ -1,6 +1,7 @@
 package me.ewan.security.config;
 
 import com.sun.org.apache.xml.internal.utils.res.XResources_it;
+import me.ewan.security.Common.LoggingFilter;
 import me.ewan.security.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -22,6 +23,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.access.expression.WebExpressionVoter;
+import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
 
 import javax.persistence.Access;
 import javax.servlet.ServletException;
@@ -56,6 +58,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        http.addFilterBefore(new LoggingFilter(), WebAsyncManagerIntegrationFilter.class);
+
         http.authorizeRequests()
                 .mvcMatchers("/", "info", "account/**", "signup").permitAll()
                 .mvcMatchers("/admin").hasRole("ADMIN")
