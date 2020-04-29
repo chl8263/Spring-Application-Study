@@ -64,9 +64,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public static ServletListenerRegistrationBean servletListenerRegistrationBean(){return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());}
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManager() throws Exception {return super.authenticationManagerBean(); }
+//    @Bean
+//    @Override
+//    public AuthenticationManager authenticationManager() throws Exception {return super.authenticationManagerBean(); }
 
     public SecurityExpressionHandler expressionHandler(){
 
@@ -142,7 +142,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             })
         ;
 
-        SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL); //Share security context, if create new Thread
+        //SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL); //Share security context, if create new Thread
     }
 
     // in memory

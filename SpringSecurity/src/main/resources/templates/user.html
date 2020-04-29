@@ -7,5 +7,10 @@
 <body>
 
     <h1 th:text="${message}">info</h1>
+    <tr th:each="book : ${books}">
+        <td>
+            <span th:text="${book.title}">title</span>
+        </td>
+    </tr>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package me.ewan.security.form;
 
 import me.ewan.security.Common.SecurityLogger;
+import me.ewan.security.book.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,9 @@ public class SampleController {
 
     @Autowired
     SampleService sampleService;
+
+    @Autowired
+    BookRepository bookRepository;
 
     @GetMapping("/")
     public String index(Model model, Principal principal){
@@ -49,6 +53,7 @@ public class SampleController {
     @GetMapping("/user")
     public String user(Model model, Principal principal){
         model.addAttribute("message", "hello user" + principal.getName());
+        model.addAttribute("books", bookRepository.findCurrentUserBooks(principal.getName()));
         return "user";
     }
 
