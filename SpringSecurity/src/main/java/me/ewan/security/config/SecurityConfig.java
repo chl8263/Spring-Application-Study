@@ -45,7 +45,6 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
     @Autowired
     AccountService accountService;
 
@@ -66,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //    @Bean
 //    @Override
-//    public AuthenticationManager authenticationManager() throws Exception {return super.authenticationManagerBean(); }
+//    public AuthenticationManager authenticationManager() throws Exception {return super.authenticationManagerBean(); } 
 
     public SecurityExpressionHandler expressionHandler(){
 
